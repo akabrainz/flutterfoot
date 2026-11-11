@@ -1,0 +1,605 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f8fbf8">
+<meta name="description" content="A little fun, a little fortune. FlutterFoot is coming soon!">
+
+<title>FlutterFoot — Your Little Fortune Awaits</title>
+
+<style>
+:root {
+  --green: #269b72;
+  --dark: #263b32;
+  --muted: #718078;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: var(--dark);
+  background:
+    radial-gradient(circle at 10% 15%, #ddf5e8, transparent 32%),
+    radial-gradient(circle at 90% 85%, #e8edff, transparent 32%),
+    #f8fbf8;
+}
+
+/* HEADER & CENTERED RESPONSIVE LOGO */
+
+header {
+  position: relative;
+  width: 100%;
+  min-height: 125px;
+  padding: 20px 7%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-decoration: none;
+}
+
+.logo {
+  display: block;
+  width: min(520px, 65vw);
+  height: auto;
+  max-height: 115px;
+  object-fit: contain;
+  margin: 0 auto;
+}
+
+.status {
+  position: absolute;
+  right: 7%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #e3f5eb;
+  color: #278966;
+  padding: 9px 15px;
+  border-radius: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* MAIN CONTENT */
+
+main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px 65px;
+}
+
+.content {
+  max-width: 720px;
+  width: 100%;
+  text-align: center;
+}
+
+.eyebrow {
+  color: #24956f;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+h1 {
+  font-size: clamp(38px, 7vw, 60px);
+  letter-spacing: -2.5px;
+  line-height: 1.12;
+  margin-bottom: 17px;
+}
+
+h1 span {
+  color: var(--green);
+}
+
+.intro {
+  max-width: 520px;
+  margin: auto;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+/* GAME CARD */
+
+.game-card {
+  max-width: 480px;
+  margin: 36px auto 0;
+  padding: 30px 25px;
+  border: 1px solid #e4eee8;
+  border-radius: 25px;
+  background: rgba(255,255,255,.88);
+  box-shadow: 0 15px 45px rgba(40,80,60,.07);
+}
+
+.game-title {
+  font-size: 21px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.game-hint {
+  color: #85938b;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* FORTUNE COOKIE */
+
+.cookie-area {
+  min-height: 205px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.cookie-button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 260px;
+  max-width: 100%;
+  transition: transform .3s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.cookie-button:hover {
+  transform: translateY(-6px) rotate(-3deg);
+}
+
+.cookie-button:focus-visible,
+.play-button:focus-visible {
+  outline: 3px solid #24956f;
+  outline-offset: 6px;
+  border-radius: 18px;
+}
+
+.cookie-svg {
+  width: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 12px 12px rgba(120,80,30,.15));
+}
+
+.fortune-paper {
+  opacity: 0;
+  transform: translateY(35px);
+  transition: all .65s ease;
+}
+
+.cookie-button.open .fortune-paper {
+  opacity: 1;
+  transform: translateY(-48px);
+}
+
+.cookie-body {
+  transform-origin: center;
+}
+
+.cookie-button.open .cookie-body {
+  animation: cookieCrack .65s ease forwards;
+}
+
+@keyframes cookieCrack {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.08) rotate(3deg); }
+  100% { transform: scale(1.03); }
+}
+
+/* FORTUNE REVEAL */
+
+.fortune {
+  display: none;
+  background: #f4f8f1;
+  border: 1px dashed #a8d3b8;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 5px 0 20px;
+}
+
+.fortune.show {
+  display: block;
+  animation: reveal .5s ease;
+}
+
+.fortune-label {
+  color: #24956f;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.fortune-message {
+  font-family: Georgia, serif;
+  color: #354b3e;
+  font-size: 19px;
+  line-height: 1.55;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* PLAY BUTTON */
+
+.play-button {
+  border: none;
+  border-radius: 30px;
+  padding: 14px 28px;
+  background: var(--green);
+  color: white;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+  box-shadow: 0 6px 15px rgba(38,155,114,.2);
+}
+
+.play-button:hover {
+  background: #187c59;
+  transform: translateY(-2px);
+}
+
+.small-note {
+  color: #98a49d;
+  font-size: 12px;
+  margin-top: 16px;
+}
+
+/* FOOTER */
+
+footer {
+  text-align: center;
+  padding: 24px 15px;
+  color: #87958d;
+  font-size: 13px;
+}
+
+/* MOBILE */
+
+@media(max-width: 600px) {
+  header {
+    min-height: 105px;
+    padding: 15px 12px;
+  }
+
+  .logo {
+    width: 65vw;
+    max-width: 300px;
+    max-height: 85px;
+  }
+
+  .status {
+    right: 12px;
+    top: 10px;
+    transform: none;
+    font-size: 10px;
+    padding: 6px 9px;
+  }
+
+  h1 {
+    letter-spacing: -1.5px;
+  }
+
+  .intro {
+    font-size: 15px;
+  }
+
+  .game-card {
+    padding: 25px 18px;
+  }
+
+  .cookie-button {
+    width: 235px;
+  }
+}
+
+@media(max-width: 360px) {
+  .logo {
+    width: 62vw;
+  }
+
+  .status {
+    font-size: 9px;
+    padding: 5px 8px;
+  }
+}
+
+/* ACCESSIBILITY */
+
+@media(prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+  <a class="logo-link" href="/" aria-label="FlutterFoot home">
+    <img
+      src="/images/logo.png"
+      alt="FlutterFoot"
+      class="logo"
+    >
+  </a>
+
+  <div class="status">✦ Coming Soon</div>
+</header>
+
+<!-- MAIN CONTENT -->
+
+<main>
+<section class="content">
+
+  <p class="eyebrow">A little fun while you wait</p>
+
+  <h1>Your little bit of <span>magic.</span></h1>
+
+  <p class="intro">
+    FlutterFoot is getting ready for something special.
+    While you wait, discover what the universe has
+    in store for you!
+  </p>
+
+  <!-- FORTUNE COOKIE GAME -->
+
+  <div class="game-card">
+
+    <div class="game-title">Your Fortune Awaits!</div>
+
+    <p class="game-hint" id="hint">
+      Tap the golden cookie to discover your fortune.
+    </p>
+
+    <div class="cookie-area">
+
+      <button
+        class="cookie-button"
+        id="cookie"
+        aria-label="Crack open your fortune cookie"
+      >
+
+        <svg
+          class="cookie-svg"
+          viewBox="0 0 260 190"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+
+          <defs>
+            <linearGradient id="cookieGold" x1="0" y1="0" x2=".8" y2="1">
+              <stop offset="0%" stop-color="#ffe6a0"/>
+              <stop offset="45%" stop-color="#eeb75b"/>
+              <stop offset="100%" stop-color="#b96c29"/>
+            </linearGradient>
+
+            <linearGradient id="cookieLight" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#fff0bf"/>
+              <stop offset="100%" stop-color="#d9933e"/>
+            </linearGradient>
+
+            <filter id="cookieShadow" x="-30%" y="-30%" width="160%" height="170%">
+              <feGaussianBlur stdDeviation="5"/>
+            </filter>
+          </defs>
+
+          <ellipse
+            cx="130"
+            cy="157"
+            rx="83"
+            ry="12"
+            fill="#9b713e"
+            opacity=".2"
+            filter="url(#cookieShadow)"
+          />
+
+          <!-- FORTUNE PAPER -->
+
+          <g class="fortune-paper">
+            <path
+              d="M104 104 L101 24 Q130 12 158 24 L155 108 Z"
+              fill="#fffdf0"
+              stroke="#e6d7a7"
+              stroke-width="2"
+            />
+
+            <path
+              d="M113 44 Q130 38 146 44 M113 54 Q130 48 146 54"
+              fill="none"
+              stroke="#d6c99f"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+          </g>
+
+          <!-- COOKIE BODY -->
+
+          <g class="cookie-body">
+
+            <path
+              d="M35 111 C37 59 83 29 130 42
+              C177 29 223 59 225 111
+              C207 139 167 154 130 153
+              C93 154 53 139 35 111Z"
+              fill="url(#cookieGold)"
+              stroke="#a96b2c"
+              stroke-width="3"
+            />
+
+            <path
+              d="M36 109 C60 85 92 80 130 102
+              C168 80 200 85 224 109
+              C205 137 168 151 130 151
+              C92 151 55 137 36 109Z"
+              fill="url(#cookieLight)"
+              opacity=".85"
+            />
+
+            <path
+              d="M130 43 C112 72 105 102 130 151
+              C155 102 148 72 130 43Z"
+              fill="#c47a32"
+              stroke="#9e6029"
+              stroke-width="2"
+            />
+
+            <path
+              d="M130 49 C119 77 118 108 130 141"
+              fill="none"
+              stroke="#ffe7a7"
+              stroke-width="4"
+              stroke-linecap="round"
+              opacity=".8"
+            />
+
+            <path
+              d="M46 111 Q68 82 105 93 M155 93 Q192 82 214 111"
+              fill="none"
+              stroke="#fff0bc"
+              stroke-width="4"
+              stroke-linecap="round"
+              opacity=".8"
+            />
+
+            <path
+              d="M56 124 Q88 146 116 145 M144 145 Q174 146 204 124"
+              fill="none"
+              stroke="#a96327"
+              stroke-width="2"
+              stroke-linecap="round"
+              opacity=".45"
+            />
+
+          </g>
+        </svg>
+
+      </button>
+    </div>
+
+    <!-- FORTUNE MESSAGE -->
+
+    <div class="fortune" id="fortune" aria-live="polite">
+      <div class="fortune-label">YOUR FORTUNE ✨</div>
+      <p class="fortune-message" id="fortuneMessage"></p>
+    </div>
+
+    <button class="play-button" id="playButton">
+      Crack My Cookie ✨
+    </button>
+
+    <p class="small-note">
+      A little positivity never hurts. 💚
+    </p>
+
+  </div>
+
+</section>
+</main>
+
+<!-- FOOTER -->
+
+<footer>
+  &copy; <span id="year"></span> FlutterFoot.com · Good things are coming!
+</footer>
+
+<!-- JAVASCRIPT -->
+
+<script>
+const fortunes = [
+  "A wonderful surprise is closer than you think.",
+  "Your kindness will come back to you in unexpected ways.",
+  "Big dreams begin with small steps. Take yours today.",
+  "A new adventure will bring you unexpected happiness.",
+  "Believe in yourself. You're capable of amazing things.",
+  "The best is yet to come. Keep smiling!",
+  "Someone is about to make your day brighter.",
+  "Your creativity will open a door you never noticed.",
+  "A little courage today can change your tomorrow.",
+  "Happiness grows when you share it with others.",
+  "Your next great idea is just around the corner.",
+  "Good things happen when you follow your curiosity.",
+  "Today is a perfect day to start something wonderful.",
+  "The journey ahead holds more magic than you imagine.",
+  "A fresh beginning is waiting for you.",
+  "Your smile might be someone's favorite thing today.",
+  "Take a chance. Something beautiful may happen.",
+  "Patience today will bring rewards tomorrow.",
+  "You are stronger than the challenges you face.",
+  "The world has wonderful surprises waiting for you."
+];
+
+let previousFortune = -1;
+
+const cookie = document.getElementById("cookie");
+const button = document.getElementById("playButton");
+const fortune = document.getElementById("fortune");
+const message = document.getElementById("fortuneMessage");
+const hint = document.getElementById("hint");
+
+function revealFortune() {
+  let index;
+
+  do {
+    index = Math.floor(Math.random() * fortunes.length);
+  } while (index === previousFortune && fortunes.length > 1);
+
+  previousFortune = index;
+
+  cookie.classList.remove("open");
+  void cookie.offsetWidth;
+  cookie.classList.add("open");
+
+  fortune.classList.remove("show");
+
+  setTimeout(() => {
+    message.textContent = fortunes[index];
+    fortune.classList.add("show");
+    hint.textContent = "Your fortune has arrived! ✨";
+    button.textContent = "Crack Another Cookie ✨";
+  }, 300);
+}
+
+button.addEventListener("click", revealFortune);
+cookie.addEventListener("click", revealFortune);
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+</script>
+
+</body>
+</html>
