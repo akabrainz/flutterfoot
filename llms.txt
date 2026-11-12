@@ -1,0 +1,47 @@
+# FlutterFoot Books
+
+> FlutterFoot Books is a general bookstore for every reader — from first stories to next chapters. Coming Soon.
+> Tagline: Celebrating the little kid inside all of us.
+> Website: https://flutterfoot.com/
+> Contact: flutterfootllc@gmail.com
+> Copyright: Copyright © 2026 FlutterFoot Enterprises
+
+## About
+
+FlutterFoot Books is a general bookstore for all ages and genres, not just for kids. The homepage is a Coming Soon teaser — no book titles, prices, or pre-orders are listed yet.
+
+## For every age, every stage
+
+- Ages 0-8
+- Ages 9-12
+- Teens & YA
+- Adults
+
+## Genre shelves (Coming Soon)
+
+- Children's & Picture Books
+- Fiction / Mystery / Adventure
+- Non-fiction & Ideas
+- Home / Family / Lifestyle
+- Wellbeing & New Chapters
+- Teens / YA & Coming-of-Age
+
+## Free printables
+
+Five free black-and-white activity sheets, each with colouring, counting/tracing, mazes or dot-to-dots and a draw-your-own frame:
+
+- The Reading Fox
+- Bunny's Bedtime
+- The Rainy-Day Dragon
+- The Balloon Parade
+- Owl's Story Time
+
+Each sheet carries the footer: Copyright © 2026 FlutterFoot Enterprises • flutterfoot.com
+
+## Readers Club
+
+Visitors can join the Readers Club for launch news, with a name, email address, and reading interest (children's, fiction, non-fiction/lifestyle, YA).
+
+## Fortune cookie
+
+The homepage has a fortune-cookie picker that matches a visitor to a genre shelf.
